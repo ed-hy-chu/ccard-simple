@@ -99,13 +99,13 @@ USE ccard_simple;
 -- MAGIC def clean_str(df):
 -- MAGIC     global regex_df, glob_clean_df
 -- MAGIC
--- MAGIC     if df.isEmpty()  == False:
+-- MAGIC     if df.isEmpty() == False:
 -- MAGIC         df = df.join(regex_df, expr("desc_clean RLIKE aux_regex.regex"), "left")
 -- MAGIC         df = df.withColumn("desc_clean", regexp_replace(df.desc_clean, df.regex, "")) # Clean
 -- MAGIC         df = df.select("txn_id", "txn_date", "post_date", "txn_amt", "txn_desc", "cust_key", "desc_clean")
 -- MAGIC
 -- MAGIC         joined_df = df.join(regex_df, expr("desc_clean RLIKE aux_regex.regex"), "left") # Join again to see which rows are still unclean
--- MAGIC         clean_df = joined_df.where(expr("aux_regex.regex IS NULL")) # Rows that do not need cleansing (no regex match at all)
+-- MAGIC         clean_df = joined_df.where(expr("aux_regex.regex IS NULL")) # Rows that do not need further cleansing
 -- MAGIC         clean_df = clean_df.select("txn_id", "txn_date", "post_date", "txn_amt", "txn_desc", "cust_key", "desc_clean")
 -- MAGIC         unclean_df = joined_df.where(expr("aux_regex.regex IS NOT NULL")) # Rows that need further cleansing
 -- MAGIC         unclean_df = unclean_df.select("txn_id", "txn_date", "post_date", "txn_amt", "txn_desc", "cust_key", "desc_clean")
