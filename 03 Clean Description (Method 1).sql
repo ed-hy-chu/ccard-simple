@@ -7,6 +7,13 @@ USE ccard_simple;
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC **Method 1**: regexp_replace by matching every regular expression in aux_regex using a for loop
+-- MAGIC
+-- MAGIC Suitable for situations with a lower data volume
+
+-- COMMAND ----------
+
 -- MAGIC %python
 -- MAGIC from pyspark.sql.functions import regexp_replace
 -- MAGIC
@@ -14,7 +21,7 @@ USE ccard_simple;
 -- MAGIC data = spark.sql("SELECT * FROM bronze_txn_data")
 -- MAGIC data_cleaned = data.withColumn("desc_cleaned", data["txn_desc"])
 -- MAGIC
--- MAGIC regex_df = spark.sql("SELECT regex FROM aux_regex")
+-- MAGIC regex_df = spark.sql("SELECT regex FROM aux_regex ORDER BY priority")
 -- MAGIC regex_rows = regex_df.collect()
 -- MAGIC for row in regex_rows:
 -- MAGIC     data_cleaned = data_cleaned.withColumn("desc_cleaned", regexp_replace(data_cleaned["desc_cleaned"], f"{row.regex}", ""))

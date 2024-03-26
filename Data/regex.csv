@@ -1,4 +1,4 @@
-name,regex
-uk_phone,(0?\d{2}(-| )?\d{4}(-| )?\d{4})|(0?\d{3}(-| )?\d{3}(-| )?\d{4})|(0?\d{4}(-| )?\d{3}(-| )?\d{3})
-uk_postcode,(?<O>(?<d>[BEGLMNS]|A[BL]|B[ABDHLNRST]|C[ABFHMORTVW]|D[ADEGHLNTY]|E[HNX]|F[KY]|G[LUY]|H[ADGPRSUX]|I[GMPV]|JE|K[ATWY]|L[ADELNSU]|M[EKL]|N[EGNPRW]|O[LX]|P[AEHLOR]|R[GHM]|S[AEGKL-PRSTWY]|T[ADFNQRSW]|UB|W[ADFNRSV]|YO|ZE)(?<a1>\d\d?)|(?<d1>E)(?<a2>\dW)|(?<d2>EC)(?<a3>\d[AMNPRVY0])|(?<d3>N)(?<a>\dP)|(?<d4>NW)(?<a4>\dW)|(?<d5>SE)(?<a5>\dP)|(?<d6>SW)(?<a6>\d[AEHPVWXY])|(?<d7>W)(?<a7>1[0-4A-DFGHJKSTUW])|(?<d8>W)(?<a8>[2-9])|(?<d9>WC)(?<a9>[12][ABEHNRVX]))\ ?(?<I>(?<s>\d)(?<u>[ABD-HJLNP-UW-Z]{2}))
-trail_country, (GBR|JPN|IRL) *$
+name,priority,regex
+uk_phone,1,(0?\d{2}(-| )?\d{4}(-| )?\d{4})|(0?\d{3}(-| )?\d{3}(-| )?\d{4})|(0?\d{4}(-| )?\d{3}(-| )?\d{3})
+uk_postcode,2,(?<O>(?<d>[BEGLMNS]|A[BL]|B[ABDHLNRST]|C[ABFHMORTVW]|D[ADEGHLNTY]|E[HNX]|F[KY]|G[LUY]|H[ADGPRSUX]|I[GMPV]|JE|K[ATWY]|L[ADELNSU]|M[EKL]|N[EGNPRW]|O[LX]|P[AEHLOR]|R[GHM]|S[AEGKL-PRSTWY]|T[ADFNQRSW]|UB|W[ADFNRSV]|YO|ZE)(?<a1>\d\d?)|(?<d1>E)(?<a2>\dW)|(?<d2>EC)(?<a3>\d[AMNPRVY0])|(?<d3>N)(?<a>\dP)|(?<d4>NW)(?<a4>\dW)|(?<d5>SE)(?<a5>\dP)|(?<d6>SW)(?<a6>\d[AEHPVWXY])|(?<d7>W)(?<a7>1[0-4A-DFGHJKSTUW])|(?<d8>W)(?<a8>[2-9])|(?<d9>WC)(?<a9>[12][ABEHNRVX]))\ ?(?<I>(?<s>\d)(?<u>[ABD-HJLNP-UW-Z]{2}))
+trail_country,3, (GBR|JPN|IRL) *$

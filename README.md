@@ -30,5 +30,9 @@ The data files are provided in the `Data` directory. The notebook assumes the fo
 - `regex.csv` list of regular expressions to be matched in **03 Clean Description**
 
 ## Job Setup
-To run the notebooks as a job, the following task sequence is recommended and has been tested:
-> **01 Data Setup** → **03 Clean Description** → **04 Calculate Delay (Method 2)**
+To run the notebooks as a job, the following task sequences are recommended and have been tested:
+> **01 Data Setup** → **03 Clean Description (Method 1)** → **04 Calculate Delay (Method 2)**
+
+or
+
+> **01 Data Setup** → **03 Clean Description (Method 2)** → **04 Calculate Delay (Method 2)**

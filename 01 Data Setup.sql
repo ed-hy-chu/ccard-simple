@@ -136,7 +136,7 @@ SELECT * FROM bronze_txn_data;
 
 -- COMMAND ----------
 
--- MAGIC %md Load regex.csv as aux_regex_ext (External Table) / aux_regex (Delta Table) for **03 Clean Description**
+-- MAGIC %md Load regex.csv as aux_regex_ext (External Table) / aux_regex (Delta Table) for **03 Clean Description** (Both methods)
 
 -- COMMAND ----------
 
@@ -144,6 +144,7 @@ USE SCHEMA ccard_simple;
 DROP TABLE IF EXISTS aux_regex_ext;
 CREATE TABLE aux_regex_ext (
   name STRING,
+  priority INT,
   regex STRING
 ) USING CSV
   OPTIONS (header="true", delimiter=",")
@@ -155,13 +156,14 @@ SELECT * FROM aux_regex_ext;
 
 CREATE OR REPLACE TABLE aux_regex (
   name STRING,
+  priority INT,
   regex STRING
 );
 
 -- COMMAND ----------
 
 INSERT INTO aux_regex
-SELECT name, regex FROM aux_regex_ext;
+SELECT name, priority, regex FROM aux_regex_ext;
 
 -- COMMAND ----------
 
