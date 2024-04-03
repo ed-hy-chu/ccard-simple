@@ -20,14 +20,6 @@ USE ccard_simple;
 
 -- COMMAND ----------
 
-DROP TABLE gold_panel_4;
-DROP TABLE gold_panel_9;
-DROP TABLE gold_panel_13;
-DROP TABLE gold_panel_26;
-DROP TABLE gold_panel_52;
-
--- COMMAND ----------
-
 -- MAGIC %python
 -- MAGIC weeks = [4, 9, 13, 26, 52]
 -- MAGIC for w in weeks:
