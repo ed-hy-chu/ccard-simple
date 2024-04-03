@@ -217,7 +217,8 @@ DROP TABLE IF EXISTS aux_calendarseq_ext;
 CREATE TABLE aux_calendarseq_ext (
   day DATE,
   is_nonworking CHAR(1),
-  seq SMALLINT
+  seq SMALLINT,
+  wk_seq SMALLINT
 ) USING CSV
   OPTIONS (header="true", delimiter=",")
   LOCATION '${env.azureblob}/card_simple/calendarseq.csv';
@@ -228,13 +229,14 @@ SELECT * FROM aux_calendarseq_ext;
 
 CREATE OR REPLACE TABLE aux_calendarseq (
   day DATE,
-  seq SMALLINT
+  seq SMALLINT,
+  wk_seq SMALLINT
 );
 
 -- COMMAND ----------
 
 INSERT INTO aux_calendarseq
-SELECT day, seq FROM aux_calendarseq_ext;
+SELECT day, seq, wk_seq FROM aux_calendarseq_ext;
 
 -- COMMAND ----------
 

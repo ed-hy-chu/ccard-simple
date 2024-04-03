@@ -1,9 +1,9 @@
 -- Databricks notebook source
-USE ccard_simple;
+-- MAGIC %md ### Calculate the delay between post_date and txn_date (excluding Sat/Sun/bank holidays)
 
 -- COMMAND ----------
 
--- MAGIC %md ### Calculate the delay between post_date and txn_date (excluding Sat/Sun/bank holidays)
+USE ccard_simple;
 
 -- COMMAND ----------
 

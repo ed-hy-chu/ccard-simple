@@ -1,9 +1,9 @@
 -- Databricks notebook source
-USE ccard_simple;
+-- MAGIC %md ##Clean description field (Remove UK phone numbers, UK post codes and specified keywords)
 
 -- COMMAND ----------
 
--- MAGIC %md ##Clean description field (Remove UK phone numbers, UK post codes and specified keywords)
+USE ccard_simple;
 
 -- COMMAND ----------
 

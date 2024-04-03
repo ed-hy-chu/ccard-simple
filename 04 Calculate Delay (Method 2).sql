@@ -1,20 +1,20 @@
 -- Databricks notebook source
-USE ccard_simple;
-
--- COMMAND ----------
-
 -- MAGIC %md ### Calculate the delay between post_date and txn_date (excluding Sat/Sun/bank holidays)
 
 -- COMMAND ----------
 
+USE ccard_simple;
+
+-- COMMAND ----------
+
 CREATE OR REPLACE TABLE gold_txn_data (
-  txn_id CHAR(36),
+  txn_id STRING,
   txn_date DATE,
   post_date DATE,
   delay INT,
   txn_amt DECIMAL(10,2),
-  txn_desc VARCHAR(100),
-  cust_key CHAR(16)
+  txn_desc STRING,
+  cust_key STRING
 );
 
 -- COMMAND ----------
