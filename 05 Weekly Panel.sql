@@ -62,10 +62,13 @@ USE ccard_simple;
 -- MAGIC     day = df.collect()
 -- MAGIC     return day[0].last_day_of_wk
 -- MAGIC
--- MAGIC def run_panel(N):
+-- MAGIC def run_panel(N, last_day_of_wk):
+-- MAGIC     """
+-- MAGIC     N (int): The number of weeks in a time window / period
+-- MAGIC     last_day_of_wk: The last day of the final week in the time window / period
+-- MAGIC     """
 -- MAGIC     # Date calculation for periods
--- MAGIC     today = dbutils.widgets.get("today")
--- MAGIC     curr_end_day : str = get_last_day_of_wk(today) # Equivalent to the last day of the week of "today"
+-- MAGIC     curr_end_day : str = last_day_of_wk
 -- MAGIC     curr_start_day : str = (datetime.strptime(curr_end_day, '%Y-%m-%d') - timedelta(days=7*N-1)).strftime('%Y-%m-%d')
 -- MAGIC     print(f"curr period start: {curr_start_day}")
 -- MAGIC     print(f"curr period end: {curr_end_day}")
@@ -106,8 +109,11 @@ USE ccard_simple;
 -- MAGIC             GROUP BY T.cust_key
 -- MAGIC             """)
 -- MAGIC
--- MAGIC run_panel(4)
--- MAGIC run_panel(9)
--- MAGIC run_panel(13)
--- MAGIC run_panel(26)
--- MAGIC run_panel(52)
+-- MAGIC today : str = dbutils.widgets.get("today") # Obtain from notebook parameter
+-- MAGIC last_day_of_wk : str = get_last_day_of_wk(today)
+-- MAGIC
+-- MAGIC run_panel(4, last_day_of_wk)
+-- MAGIC run_panel(9, last_day_of_wk)
+-- MAGIC run_panel(13, last_day_of_wk)
+-- MAGIC run_panel(26, last_day_of_wk)
+-- MAGIC run_panel(52, last_day_of_wk)
