@@ -94,15 +94,15 @@ USE ccard_simple;
 -- MAGIC                 COUNT(1) AS total_txn_cnt
 -- MAGIC             FROM global_temp.silver_txn_data_tmpvw T
 -- MAGIC             WHERE T.cust_key IN ( --cust_key that appear in both periods
--- MAGIC                     SELECT cust_key
--- MAGIC                     FROM global_temp.silver_txn_data_tmpvw T
--- MAGIC                     WHERE T.txn_date >= '{curr_start_day}'
--- MAGIC                     AND T.txn_date <= '{curr_end_day}'
+-- MAGIC                     SELECT T1.cust_key
+-- MAGIC                     FROM global_temp.silver_txn_data_tmpvw T1
+-- MAGIC                     WHERE T1.txn_date >= '{curr_start_day}'
+-- MAGIC                     AND T1.txn_date <= '{curr_end_day}'
 -- MAGIC                     INTERSECT
--- MAGIC                     SELECT cust_key
--- MAGIC                     FROM global_temp.silver_txn_data_tmpvw T
--- MAGIC                     WHERE T.txn_date >= '{prev_start_day}'
--- MAGIC                     AND T.txn_date <= '{prev_end_day}'
+-- MAGIC                     SELECT T2.cust_key
+-- MAGIC                     FROM global_temp.silver_txn_data_tmpvw T2
+-- MAGIC                     WHERE T2.txn_date >= '{prev_start_day}'
+-- MAGIC                     AND T2.txn_date <= '{prev_end_day}'
 -- MAGIC                 )
 -- MAGIC             AND T.txn_date >= '{curr_start_day}'
 -- MAGIC             AND T.txn_date <= '{curr_end_day}'
