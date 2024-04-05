@@ -25,14 +25,26 @@ This project assumes that the raw data file (CSV) is stored on Azure Blob Storag
 ## Data Files
 The data files are provided in the `Data` directory. The notebook assumes the following files are stored on Azure Blob Storage, accessed through **01 Data Setup**.
 - `data.csv` containing the raw data to be transformed
-- `calendar.csv` calendar lookup table for **04 Calculate Delay (Method 1)**
-- `calendarseq.csv` calendar lookup table for **04 Calculate Delay (Method 2)**
-- `regex.csv` list of regular expressions to be matched in **03 Clean Description**
+- `calendar.csv` calendar lookup table for **03 Calculate Delay (Method 1)**
+- `calendarseq.csv` calendar lookup table for **03 Calculate Delay (Method 2)**
+- `regex.csv` list of regular expressions to be matched in **02 Clean Description (Method 1)** and **02 Clean Description (Method 2)**
+
+## Notebooks and Tasks
+- `01 Data Setup` includes the configuration for obtaining data files from Azure Blob Storage and preparing them for further consumption in the pipeline.
+- `02 Clean Description (Method 1 or Method 2)` cleans the transaction description data using regular expression rules specified in `regex.csv`. Produces a global temporary view in the Silver layer (`global_temp.silver_txn_data_tmpvw`) for further consumption in the pipeline.
+  - **Method 1**: Matching regular expressions using a for loop
+  - **Method 2**: Matching regular expressions using `JOIN` and recursion (assigning a numerical state to each row that indicates how many regular expressions have been executed)
+- `03 Calculate Delay (Method 1 or Method 2)` calculates the delay between the transaction date of the transaction and the post date of the transaction, using the data from the Silver layer (`global_temp.silver_txn_data_tmpvw`). Produces a delta table in the Gold layer (`gold_txn_data`) for further consumption.
+  - **Method 1**: Calculation of delay using `CASE`
+  - **Method 2**: Pre-calculate the delay in the auxiliary calendar table (`aux_calendarseq`)
+- `04 Periodic Panel` obtains the aggregations specified by the business requirements. Produces a delta table in the Gold layer (`gold_panel`) for further consumption.
 
 ## Job Setup
 To run the notebooks as a job, the following task sequences are recommended and have been tested:
-> **01 Data Setup** → **03 Clean Description (Method 1)** → **04 Calculate Delay (Method 2)**
+> **01 Data Setup** → **02 Clean Description (Method 1)** → **03 Calculate Delay (Method 2)** → **04 Periodic Panel** \*
 
 or
 
-> **01 Data Setup** → **03 Clean Description (Method 2)** → **04 Calculate Delay (Method 2)**
+> **01 Data Setup** → **02 Clean Description (Method 2)** → **03 Calculate Delay (Method 2)** → **04 Periodic Panel** \*
+
+\* For `04 Periodic Panel`, the parameter `today` should be set in the job task as a date string in the "YYYY-MM-DD" format. See the notebook for more details.
