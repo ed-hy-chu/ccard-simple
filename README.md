@@ -41,10 +41,8 @@ The data files are provided in the `Data` directory. The notebook assumes the fo
 
 ## Job Setup
 To run the notebooks as a job, the following task sequences are recommended and have been tested:
-> **01 Data Setup** → **02 Clean Description (Method 1)** → **03 Calculate Delay (Method 2)** → **04 Periodic Panel** \*
+> **01 Data Setup** → **02 Clean Description (Method 2 or 1)** \# → **03 Calculate Delay (Method 2 or 1)** \# → **04 Periodic Panel** \*
 
-or
-
-> **01 Data Setup** → **02 Clean Description (Method 2)** → **03 Calculate Delay (Method 2)** → **04 Periodic Panel** \*
+\# Method 2 is more optimised than Method 1.
 
 \* For `04 Periodic Panel`, the parameter `today` should be set in the job task as a date string in the "YYYY-MM-DD" format. See the notebook for more details.
