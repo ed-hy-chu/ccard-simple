@@ -77,13 +77,15 @@ CREATE TABLE IF NOT EXISTS gold_panel (
 -- MAGIC     day = df.collect()
 -- MAGIC     return day[0].last_day_of_wk
 -- MAGIC
--- MAGIC def run_panel(N, last_day_of_wk):
+-- MAGIC def run_panel(N):
 -- MAGIC     """
 -- MAGIC     N (int): The number of weeks in a time window / period
--- MAGIC     last_day_of_wk: The last day of the final week in the time window / period
 -- MAGIC     """
+-- MAGIC     print(f"N = {N}")
+-- MAGIC
 -- MAGIC     # Date calculation for periods
--- MAGIC     curr_end_day : str = last_day_of_wk
+-- MAGIC     global LAST_DAY_OF_WK
+-- MAGIC     curr_end_day : str = LAST_DAY_OF_WK
 -- MAGIC     curr_end_day_dt : datetime = datetime.strptime(curr_end_day, '%Y-%m-%d')
 -- MAGIC     curr_start_day : str = (datetime.strptime(curr_end_day, '%Y-%m-%d') - timedelta(days=7*N-1)).strftime('%Y-%m-%d')
 -- MAGIC     curr_start_day_dt : datetime = datetime.strptime(curr_start_day, '%Y-%m-%d')
@@ -127,20 +129,20 @@ CREATE TABLE IF NOT EXISTS gold_panel (
 -- MAGIC             """)
 -- MAGIC     return df
 -- MAGIC
--- MAGIC today : str = dbutils.widgets.get("today") # Obtain from notebook parameter
--- MAGIC last_day_of_wk : str = get_last_day_of_wk(today)
+-- MAGIC TODAY : str = dbutils.widgets.get("today") # Obtain from notebook parameter
+-- MAGIC LAST_DAY_OF_WK : str = get_last_day_of_wk(TODAY)
 -- MAGIC
--- MAGIC df4 = run_panel(4, last_day_of_wk)
--- MAGIC df9 = run_panel(9, last_day_of_wk)
--- MAGIC df13 = run_panel(13, last_day_of_wk)
--- MAGIC df26 = run_panel(26, last_day_of_wk)
--- MAGIC df52 = run_panel(52, last_day_of_wk)
+-- MAGIC df4 = run_panel(4)
+-- MAGIC df9 = run_panel(9)
+-- MAGIC df13 = run_panel(13)
+-- MAGIC df26 = run_panel(26)
+-- MAGIC df52 = run_panel(52)
 -- MAGIC
 -- MAGIC # Prepare data into the enriched layer
--- MAGIC enriched_df = df4.union(df9)
--- MAGIC enriched_df = enriched_df.union(df13)
--- MAGIC enriched_df = enriched_df.union(df26)
--- MAGIC enriched_df = enriched_df.union(df52)
+-- MAGIC enriched_df = df4.union(df9)\
+-- MAGIC                 .union(df13)\
+-- MAGIC                 .union(df26)\
+-- MAGIC                 .union(df52)
 -- MAGIC enriched_df.createOrReplaceTempView("enriched_panel")
 -- MAGIC
 -- MAGIC # Insert into gold layer
