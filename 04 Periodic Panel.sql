@@ -54,6 +54,10 @@ CREATE TABLE IF NOT EXISTS gold_panel (
 
 -- COMMAND ----------
 
+dbutils.widgets.text("today", "")
+
+-- COMMAND ----------
+
 -- MAGIC %python
 -- MAGIC from pyspark.sql.functions import date_add
 -- MAGIC from datetime import datetime, timedelta

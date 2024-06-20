@@ -1,7 +1,13 @@
 # Mini Project on Credit Card Transaction Data
 
+## Overview
+
+This project aims to build a data pipeline that ingests credit card transaction data from a CSV source, applies cleansing and transformation, and prepares aggregated results for the reporting layer.
+
 ## System Environment
-- Developed and tested on Databricks Runtime 14.3 LTS ML
+- Cloud: `Microsoft Azure`
+- Data transformation: `Databricks (Runtime 14.3) LTS ML`
+- Orchestration: `Databricks Workflow`
 
 ## Setup of Secret Scope and Secret
 This project assumes that the raw data file (CSV) is stored on Azure Blob Storage. SAS token authentication is used in this project. To complete the authentication setup, create a SAS token for the container that contains the raw data file. "Read" and "List" permissions are required. Afterwards, go through the following steps.
@@ -40,7 +46,7 @@ The data files are provided in the `Data` directory. The notebook assumes the fo
 - `04 Periodic Panel` obtains the aggregations specified by the business requirements. Produces a delta table in the Gold layer (`gold_panel`) for further consumption.
 
 ## Job Setup
-To run the notebooks as a job, the following task sequences are recommended and have been tested:
+To run the notebooks as a job (Databricks Workflow), the following task sequences are recommended and have been tested:
 > **01 Data Setup** → **02 Clean Description (Method 2 or 1)** \# → **03 Calculate Delay (Method 2 or 1)** \# → **04 Periodic Panel** \*
 
 \# Method 2 is more optimised than Method 1.
